@@ -25,7 +25,7 @@ int main(int argc, const char * argv[])
     SDL_RendererFlip flip = SDL_FLIP_NONE;
     /**
      Implement into player object?
-     Not done yet
+     Not done yet.
      */
     SDL_Rect possition;
     possition.y = 64;
