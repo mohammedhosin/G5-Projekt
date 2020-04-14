@@ -9,7 +9,8 @@ bool init();
 void renderBackground();
 bool initPlayField();
 bool initMedia();
-
+int collisionDetectionXpos(int x_pos);
+int collisionDetectionYpos(int y_pos);
 
 
 SDL_Window *window = NULL;
@@ -22,7 +23,9 @@ SDL_Texture *mPlayer = NULL;
 
 SDL_Rect gField;
 SDL_Rect gPlayer;
-#define SPEED (75);
+// struct to hold the position and size of the sprite
+SDL_Rect dest;
+#define SPEED (300); //75 is optimal, 300 for dev.
 int main(int argc, const char * argv[])
 {
     /**
@@ -71,8 +74,7 @@ int main(int argc, const char * argv[])
         printf("Initialize media successful.\n");
     }
     /*  Taken from Jonas Willén, SDL_net.zip*/
-        // struct to hold the position and size of the sprite
-        SDL_Rect dest;
+        
 
         // get and scale the dimensions of texture
         SDL_QueryTexture(mPlayer, NULL, NULL, &dest.w, &dest.h);
@@ -87,69 +89,73 @@ int main(int argc, const char * argv[])
         float y_vel = 0;
 
         // keep track of which inputs are given
-        int up = 0;
-        int down = 0;
-        int left = 0;
-        int right = 0;
+        bool up = false;
+        bool down = false;
+        bool left = false;
+        bool right = false;
         
     /*  End of SDL_net.zip code*/
     while(running)
     {
-        /**
-        While loop checking if an event occured.
-         Code taken from Jonas Willén, SDL_net.zip
-         */
-            SDL_Event event;
-            while (SDL_PollEvent(&event))
+    /**
+    While loop checking if an event occured.
+     Code taken from Jonas Willén, SDL_net.zip
+     */
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            running = false;
+            break;
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.scancode)
             {
-                switch (event.type)
-                {
-                case SDL_QUIT:
-                    running = false;
+                case SDL_SCANCODE_W:
+                case SDL_SCANCODE_UP:
+                    up = true;
                     break;
-                case SDL_KEYDOWN:
-                    switch (event.key.keysym.scancode)
-                    {
-                    case SDL_SCANCODE_W:
-                    case SDL_SCANCODE_UP:
-                        up = 1;
-                        break;
-                    case SDL_SCANCODE_A:
-                    case SDL_SCANCODE_LEFT:
-                        left = 1;
-                        break;
-                    case SDL_SCANCODE_S:
-                    case SDL_SCANCODE_DOWN:
-                        down = 1;
-                        break;
-                    case SDL_SCANCODE_D:
-                    case SDL_SCANCODE_RIGHT:
-                        right = 1;
-                        break;
-                    }
+                case SDL_SCANCODE_A:
+                case SDL_SCANCODE_LEFT:
+                    left = true;
                     break;
-                case SDL_KEYUP:
-                    switch (event.key.keysym.scancode)
-                    {
-                    case SDL_SCANCODE_W:
-                    case SDL_SCANCODE_UP:
-                        up = 0;
-                        break;
-                    case SDL_SCANCODE_A:
-                    case SDL_SCANCODE_LEFT:
-                        left = 0;
-                        break;
-                    case SDL_SCANCODE_S:
-                    case SDL_SCANCODE_DOWN:
-                        down = 0;
-                        break;
-                    case SDL_SCANCODE_D:
-                    case SDL_SCANCODE_RIGHT:
-                        right = 0;
-                        break;
-                    }
+                case SDL_SCANCODE_S:
+                case SDL_SCANCODE_DOWN:
+                    down = true;
                     break;
-                }
+                case SDL_SCANCODE_D:
+                case SDL_SCANCODE_RIGHT:
+                    right = true;
+                    break;
+                default:
+                    break;
+            }
+            break;
+            case SDL_KEYUP:
+            switch (event.key.keysym.scancode)
+            {
+                case SDL_SCANCODE_W:
+                case SDL_SCANCODE_UP:
+                    up = false;
+                    break;
+                case SDL_SCANCODE_A:
+                case SDL_SCANCODE_LEFT:
+                    left = false;
+                    break;
+                case SDL_SCANCODE_S:
+                case SDL_SCANCODE_DOWN:
+                    down = false;
+                    break;
+                case SDL_SCANCODE_D:
+                case SDL_SCANCODE_RIGHT:
+                    right = false;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        }
     }
         
         /* Taken from Jonas Willén, SDL_net.zip*/
@@ -159,20 +165,14 @@ int main(int argc, const char * argv[])
        if (down && !up) y_vel = SPEED;
        if (left && !right) x_vel = -SPEED;
        if (right && !left) x_vel = SPEED;
-
        // update positions
        x_pos += x_vel / 60;
        y_pos += y_vel / 60;
 
-       // collision detection with bounds
-       if (x_pos <= 0) x_pos = 0;
-       if (y_pos <= 0) y_pos = 0;
-       if (x_pos >= WINDOW_WIDTH - dest.w) x_pos = WINDOW_WIDTH - dest.w;
-       if (y_pos >= WINDOW_HEIGTH - dest.h) y_pos = WINDOW_HEIGTH - dest.h;
         
        // set the positions in the struct
-       dest.y = (int) y_pos;
-       dest.x = (int) x_pos;
+       dest.y = collisionDetectionYpos(y_pos);
+       dest.x = collisionDetectionXpos(x_pos);
         /*  end of SDL_net.zip*/
         
         SDL_RenderClear(renderer);
@@ -193,6 +193,26 @@ int main(int argc, const char * argv[])
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     return 0;
+}
+/**
+ Collisiondetection for moving object on X-axis. Makes sure that the objec stays within the window
+ Code taken from Jonas Willén, SDL_net.zip
+ */
+int collisionDetectionXpos(int x_pos)
+{
+    if (x_pos <= 0) x_pos = 0;
+    if (x_pos >= WINDOW_WIDTH - dest.w) x_pos = WINDOW_WIDTH - dest.w;
+    return x_pos;
+}
+/**
+Collisiondetection for moving object on Y-axis. Makes sure that the objec stays within the window
+Code taken from Jonas Willén, SDL_net.zip
+*/
+int collisionDetectionYpos(int y_pos)
+{
+    if (y_pos <= 0) y_pos = 0;
+    if (y_pos >= WINDOW_HEIGTH - dest.h) y_pos = WINDOW_HEIGTH - dest.h;
+    return y_pos;
 }
 /**
  Init other media
