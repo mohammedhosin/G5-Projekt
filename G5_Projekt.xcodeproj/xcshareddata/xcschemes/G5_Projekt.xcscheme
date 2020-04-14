@@ -42,7 +42,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         FilePath = "/Users/ernstreutergardh/Documents/G5_Projekt/Source Code/G5_Projekt">
+         FilePath = "/Users/ernstreutergardh/Library/Developer/Xcode/DerivedData/G5_Projekt-fzpomyasughjoefbudducyqtuoup/Build/Products/Debug/G5_Projekt">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
