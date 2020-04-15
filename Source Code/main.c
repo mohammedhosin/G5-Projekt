@@ -11,6 +11,9 @@ bool initPlayField();
 bool initMedia();
 int collisionDetectionXpos(int x_pos);
 int collisionDetectionYpos(int y_pos);
+int determineVelocityX(bool left, bool right);
+int determineVelocityY(bool up, bool down);
+
 
 
 SDL_Window *window = NULL;
@@ -85,8 +88,6 @@ int main(int argc, const char * argv[])
         //float x_pos = (WINDOW_WIDTH - dest.w); //Starting x-pos for right team
         float x_pos = (0); //Starting x-pos for left team
         float y_pos = (WINDOW_HEIGTH - dest.h) / 2;
-        float x_vel = 0;
-        float y_vel = 0;
 
         // keep track of which inputs are given
         bool up = false;
@@ -95,6 +96,8 @@ int main(int argc, const char * argv[])
         bool right = false;
         
     /*  End of SDL_net.zip code*/
+    
+    
     while(running)
     {
     /**
@@ -157,20 +160,11 @@ int main(int argc, const char * argv[])
             break;
         }
     }
-        
-        /* Taken from Jonas Willén, SDL_net.zip*/
-       // determine velocity
-       x_vel = y_vel = 0;
-       if (up && !down) y_vel = -SPEED;
-       if (down && !up) y_vel = SPEED;
-       if (left && !right) x_vel = -SPEED;
-       if (right && !left) x_vel = SPEED;
-       // update positions
-       x_pos += x_vel / 60;
-       y_pos += y_vel / 60;
-
-        
-       // set the positions in the struct
+        //Update positions of the struct
+        x_pos += (determineVelocityX(left, right) / 60);
+        y_pos += (determineVelocityY(up, down) / 60);
+       
+        // set the positions in the struct
        dest.y = collisionDetectionYpos(y_pos);
        dest.x = collisionDetectionXpos(x_pos);
         /*  end of SDL_net.zip*/
@@ -193,6 +187,40 @@ int main(int argc, const char * argv[])
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     return 0;
+}
+/*
+ Determines the velocity on y-axis.
+ Code taken from Jonas Willén, SDL_net.zip
+ */
+int determineVelocityY(bool up, bool down)
+{
+    int y_vel = 0;
+    if (up && !down)
+    {
+        y_vel = -SPEED;
+    }
+    if (down && !up)
+    {
+        y_vel = SPEED;
+    }
+    return y_vel;
+}
+/*
+Determines the velocity on x-axis.
+Code taken from Jonas Willén, SDL_net.zip
+*/
+int determineVelocityX(bool left, bool right)
+{
+    int x_vel = 0;
+    if (left && !right)
+    {
+        x_vel = -SPEED;
+    }
+    if (right && !left)
+    {
+        x_vel = SPEED;
+    }
+    return x_vel;
 }
 /**
  Collisiondetection for moving object on X-axis. Makes sure that the objec stays within the window
