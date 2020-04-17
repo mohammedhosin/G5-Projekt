@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		A740E1F52444F9BA005962AA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F42444F9BA005962AA /* libSDL2-2.0.0.dylib */; };
 		A740E1F72444F9D0005962AA /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */; };
-		A740E2032444FA55005962AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A740E2022444FA55005962AA /* main.c */; };
 		A749D4272449BF15009527DA /* libSDL2_net-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */; };
+		A7DF41A22449C80300648208 /* Player.c in Sources */ = {isa = PBXBuildFile; fileRef = A7DF41A12449C80300648208 /* Player.c */; };
+		A7DF41B02449D51B00648208 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A740E2022444FA55005962AA /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		A740E2012444FA55005962AA /* Player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player1.png; sourceTree = "<group>"; };
 		A740E2022444FA55005962AA /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_net-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_net/2.0.1/lib/libSDL2_net-2.0.0.dylib"; sourceTree = "<group>"; };
+		A7DF41A02449C80300648208 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		A7DF41A12449C80300648208 /* Player.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 			children = (
 				A740E1FF2444FA55005962AA /* Images */,
 				A740E2022444FA55005962AA /* main.c */,
+				A7DF41A02449C80300648208 /* Player.h */,
+				A7DF41A12449C80300648208 /* Player.c */,
 			);
 			path = "Source Code";
 			sourceTree = "<group>";
@@ -95,6 +100,23 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		A7DF41A52449D35800648208 /* make */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-j2$(ACTION)";
+			buildConfigurationList = A7DF41A62449D35800648208 /* Build configuration list for PBXLegacyTarget "make" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/ernstreutergardh/Library/Developer/Xcode/DerivedData/G5_Projekt-fzpomyasughjoefbudducyqtuoup/Build/Products/Debug";
+			dependencies = (
+			);
+			name = make;
+			passBuildSettingsInEnvironment = 1;
+			productName = make;
+		};
+/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		A740E1DC2444F61D005962AA /* G5_Projekt */ = {
@@ -126,6 +148,9 @@
 					A740E1DC2444F61D005962AA = {
 						CreatedOnToolsVersion = 11.4;
 					};
+					A7DF41A52449D35800648208 = {
+						CreatedOnToolsVersion = 11.4;
+					};
 				};
 			};
 			buildConfigurationList = A740E1D82444F61D005962AA /* Build configuration list for PBXProject "G5_Projekt" */;
@@ -142,6 +167,7 @@
 			projectRoot = "";
 			targets = (
 				A740E1DC2444F61D005962AA /* G5_Projekt */,
+				A7DF41A52449D35800648208 /* make */,
 			);
 		};
 /* End PBXProject section */
@@ -151,7 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A740E2032444FA55005962AA /* main.c in Sources */,
+				A7DF41B02449D51B00648208 /* main.c in Sources */,
+				A7DF41A22449C80300648208 /* Player.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +334,33 @@
 			};
 			name = Release;
 		};
+		A7DF41A72449D35800648208 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TKM8762PGK;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A7DF41A82449D35800648208 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TKM8762PGK;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -324,6 +378,15 @@
 			buildConfigurations = (
 				A740E1E52444F61D005962AA /* Debug */,
 				A740E1E62444F61D005962AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7DF41A62449D35800648208 /* Build configuration list for PBXLegacyTarget "make" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7DF41A72449D35800648208 /* Debug */,
+				A7DF41A82449D35800648208 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

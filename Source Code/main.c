@@ -4,6 +4,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_net.h>
+#include "Player.h"
+
 
 const int WINDOW_WIDTH = 960, WINDOW_HEIGTH = 540;
 bool init();
@@ -20,15 +22,14 @@ int determineVelocityY(bool up, bool down);
 SDL_Window *window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface *imageSurface =  NULL;
-SDL_Surface *player = NULL;
+SDL_Surface *sPlayer = NULL;
 //SDL_Surface *windowSurface = NULL;
 SDL_Texture *mField;
 SDL_Texture *mPlayer = NULL;
 
 SDL_Rect gField;
-SDL_Rect gPlayer;
 // struct to hold the position and size of the sprite
-SDL_Rect dest;
+SDL_Rect gPlayer;
 #define SPEED (300); //75 is optimal, 300 for dev.
 int main(int argc, const char * argv[])
 {
@@ -81,14 +82,14 @@ int main(int argc, const char * argv[])
         
 
         // get and scale the dimensions of texture
-        SDL_QueryTexture(mPlayer, NULL, NULL, &dest.w, &dest.h);
-        dest.w /= 10;
-        dest.h /= 10;
+        SDL_QueryTexture(mPlayer, NULL, NULL, &gPlayer.w, &gPlayer.h);
+        gPlayer.w /= 10;
+        gPlayer.h /= 10;
 
         // start sprite in the the middle of the goal
         //float x_pos = (WINDOW_WIDTH - dest.w); //Starting x-pos for right team
         float x_pos = (0); //Starting x-pos for left team
-        float y_pos = (WINDOW_HEIGTH - dest.h) / 2;
+        float y_pos = (WINDOW_HEIGTH - gPlayer.h) / 2;
 
         // keep track of which inputs are given
         bool up = false;
@@ -166,13 +167,14 @@ int main(int argc, const char * argv[])
         y_pos += (determineVelocityY(up, down) / 60);
        
         // set the positions in the struct
-       dest.y = collisionDetectionYpos(y_pos);
-       dest.x = collisionDetectionXpos(x_pos);
+       gPlayer.y = collisionDetectionYpos(y_pos);
+       gPlayer.x = collisionDetectionXpos(x_pos);
         /*  end of SDL_net.zip*/
         
         SDL_RenderClear(renderer);
         renderBackground();
-        SDL_RenderCopyEx(renderer, mPlayer, &gPlayer, &dest, 0, NULL, SDL_FLIP_NONE);
+        //SDL_RenderCopyEx(renderer, mPlayer, NULL, &dest, 0, NULL, SDL_FLIP_NONE);
+        SDL_RenderCopy(renderer, mPlayer, NULL, &gPlayer);
         SDL_RenderPresent(renderer);
         
         
@@ -230,7 +232,7 @@ int determineVelocityX(bool left, bool right)
 int collisionDetectionXpos(int x_pos)
 {
     if (x_pos <= 0) x_pos = 0;
-    if (x_pos >= WINDOW_WIDTH - dest.w) x_pos = WINDOW_WIDTH - dest.w;
+    if (x_pos >= WINDOW_WIDTH - gPlayer.w) x_pos = WINDOW_WIDTH - gPlayer.w;
     return x_pos;
 }
 /**
@@ -240,7 +242,7 @@ Code taken from Jonas Willén, SDL_net.zip
 int collisionDetectionYpos(int y_pos)
 {
     if (y_pos <= 0) y_pos = 0;
-    if (y_pos >= WINDOW_HEIGTH - dest.h) y_pos = WINDOW_HEIGTH - dest.h;
+    if (y_pos >= WINDOW_HEIGTH - gPlayer.h) y_pos = WINDOW_HEIGTH - gPlayer.h;
     return y_pos;
 }
 /**
@@ -255,9 +257,12 @@ bool initMedia()
         printf("\n");
         flag = false;
     }
-    player = IMG_Load("images/Player1.png");
+    sPlayer = IMG_Load("images/Player1.png");
     
-    mPlayer = SDL_CreateTextureFromSurface(renderer, player);
+    mPlayer = SDL_CreateTextureFromSurface(renderer, sPlayer);
+    Player player;
+    player = createPlayer(100, 100);
+    //gPlayer = {getPlayerPositionX(player), getPlayerPositionY(player),30,30};
     gPlayer.x = 100; gPlayer.y = 100; gPlayer.h = 30; gPlayer.w = 30;
     if(NULL == imageSurface)
     {
