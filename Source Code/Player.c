@@ -16,12 +16,12 @@ PRIVATE int PLAYER_HEIGTH = 30;
 
 struct Player_type
 {
-    int PLAYER_POSITION_X;
-    int PLAYER_POSITION_Y;
+    float PLAYER_POSITION_X;
+    float PLAYER_POSITION_Y;
     int speed;
 };
 
-PUBLIC Player createPlayer(int x, int y)
+PUBLIC Player createPlayer(float x, float y)
 {
     Player p = malloc(sizeof(struct Player_type));
     p->PLAYER_POSITION_Y = y;
@@ -29,23 +29,20 @@ PUBLIC Player createPlayer(int x, int y)
     p->speed = 1;
     return p;
 }
-PUBLIC void setY(Player p, int y){
-    p->PLAYER_POSITION_Y = y;
-}
-PUBLIC void setX(Player p, int x){
+PUBLIC void setPlayerPositionX(Player p, float x){
     p->PLAYER_POSITION_X = x;
 }
 
-PUBLIC void setPlayerPositionY(Player p, int y){
+PUBLIC void setPlayerPositionY(Player p, float y){
     p->PLAYER_POSITION_Y = y;
 }
 
-PUBLIC int getPlayerPositionX(Player p){
+PUBLIC float getPlayerPositionX(Player p){
     return p->PLAYER_POSITION_X;
 }
 
 
-PUBLIC int getPlayerPositionY(Player p){
+PUBLIC float getPlayerPositionY(Player p){
     return p->PLAYER_POSITION_Y;
 }
 

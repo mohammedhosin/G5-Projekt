@@ -27,6 +27,7 @@ SDL_Surface *sPlayer = NULL;
 SDL_Texture *mField;
 SDL_Texture *mPlayer = NULL;
 
+Player player = NULL;
 SDL_Rect gField;
 // struct to hold the position and size of the sprite
 SDL_Rect gPlayer;
@@ -81,21 +82,25 @@ int main(int argc, const char * argv[])
     /*  Taken from Jonas Willén, SDL_net.zip*/
         
 
-        // get and scale the dimensions of texture
-        SDL_QueryTexture(mPlayer, NULL, NULL, &gPlayer.w, &gPlayer.h);
-        gPlayer.w /= 10;
-        gPlayer.h /= 10;
+    // get and scale the dimensions of texture
+    //SDL_QueryTexture(mPlayer, NULL, NULL, &gPlayer.w, &gPlayer.h);
+    //gPlayer.w /= 10;
+    //gPlayer.h /= 10;
 
-        // start sprite in the the middle of the goal
-        //float x_pos = (WINDOW_WIDTH - dest.w); //Starting x-pos for right team
-        float x_pos = (0); //Starting x-pos for left team
-        float y_pos = (WINDOW_HEIGTH - gPlayer.h) / 2;
-
-        // keep track of which inputs are given
-        bool up = false;
-        bool down = false;
-        bool left = false;
-        bool right = false;
+    // start sprite in the the middle of the goal
+    //float x_pos = (WINDOW_WIDTH - dest.w); //Starting x-pos for right team
+    
+    float x_pos = (0); //Starting x-pos for left team
+    float y_pos = (WINDOW_HEIGTH - gPlayer.h) / 2;
+    /*
+    setPlayerPositionX(player, 0);
+    setPlayerPositionY(player, (WINDOW_HEIGTH - gPlayer.h) / 2);
+*/
+    // keep track of which inputs are given
+    bool up = false;
+    bool down = false;
+    bool left = false;
+    bool right = false;
         
     /*  End of SDL_net.zip code*/
     
@@ -106,69 +111,69 @@ int main(int argc, const char * argv[])
     While loop checking if an event occured.
      Code taken from Jonas Willén, SDL_net.zip
      */
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-        switch (event.type)
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
         {
-        case SDL_QUIT:
-            running = false;
-            break;
-        case SDL_KEYDOWN:
-            switch (event.key.keysym.scancode)
+            switch (event.type)
             {
-                case SDL_SCANCODE_W:
-                case SDL_SCANCODE_UP:
-                    up = true;
-                    break;
-                case SDL_SCANCODE_A:
-                case SDL_SCANCODE_LEFT:
-                    left = true;
-                    break;
-                case SDL_SCANCODE_S:
-                case SDL_SCANCODE_DOWN:
-                    down = true;
-                    break;
-                case SDL_SCANCODE_D:
-                case SDL_SCANCODE_RIGHT:
-                    right = true;
-                    break;
-                default:
-                    break;
+            case SDL_QUIT:
+                running = false;
+                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.scancode)
+                {
+                    case SDL_SCANCODE_W:
+                    case SDL_SCANCODE_UP:
+                        up = true;
+                        break;
+                    case SDL_SCANCODE_A:
+                    case SDL_SCANCODE_LEFT:
+                        left = true;
+                        break;
+                    case SDL_SCANCODE_S:
+                    case SDL_SCANCODE_DOWN:
+                        down = true;
+                        break;
+                    case SDL_SCANCODE_D:
+                    case SDL_SCANCODE_RIGHT:
+                        right = true;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+                case SDL_KEYUP:
+                switch (event.key.keysym.scancode)
+                {
+                    case SDL_SCANCODE_W:
+                    case SDL_SCANCODE_UP:
+                        up = false;
+                        break;
+                    case SDL_SCANCODE_A:
+                    case SDL_SCANCODE_LEFT:
+                        left = false;
+                        break;
+                    case SDL_SCANCODE_S:
+                    case SDL_SCANCODE_DOWN:
+                        down = false;
+                        break;
+                    case SDL_SCANCODE_D:
+                    case SDL_SCANCODE_RIGHT:
+                        right = false;
+                        break;
+                    default:
+                        break;
+                }
+                break;
             }
-            break;
-            case SDL_KEYUP:
-            switch (event.key.keysym.scancode)
-            {
-                case SDL_SCANCODE_W:
-                case SDL_SCANCODE_UP:
-                    up = false;
-                    break;
-                case SDL_SCANCODE_A:
-                case SDL_SCANCODE_LEFT:
-                    left = false;
-                    break;
-                case SDL_SCANCODE_S:
-                case SDL_SCANCODE_DOWN:
-                    down = false;
-                    break;
-                case SDL_SCANCODE_D:
-                case SDL_SCANCODE_RIGHT:
-                    right = false;
-                    break;
-                default:
-                    break;
-            }
-            break;
         }
-    }
         //Update positions of the struct
         x_pos += (determineVelocityX(left, right) / 60);
         y_pos += (determineVelocityY(up, down) / 60);
        
         // set the positions in the struct
-       gPlayer.y = collisionDetectionYpos(y_pos);
-       gPlayer.x = collisionDetectionXpos(x_pos);
+        gPlayer.y = collisionDetectionYpos(y_pos);
+        gPlayer.x = collisionDetectionXpos(x_pos);
         /*  end of SDL_net.zip*/
         
         SDL_RenderClear(renderer);
@@ -260,10 +265,17 @@ bool initMedia()
     sPlayer = IMG_Load("images/Player1.png");
     
     mPlayer = SDL_CreateTextureFromSurface(renderer, sPlayer);
-    Player player;
     player = createPlayer(100, 100);
-    //gPlayer = {getPlayerPositionX(player), getPlayerPositionY(player),30,30};
-    gPlayer.x = 100; gPlayer.y = 100; gPlayer.h = 30; gPlayer.w = 30;
+
+    
+    gPlayer.x = getPlayerPositionX(player);
+    gPlayer.y = getPlayerPositionY(player);
+    gPlayer.h = getPlayerHeight();
+    gPlayer.w =getPlayerWidth();
+     
+    
+    
+    //gPlayer.x = 100; gPlayer.y = 100; gPlayer.h = 30; gPlayer.w = 30;
     if(NULL == imageSurface)
     {
         printf("\nCould not load image. Error: %s",SDL_GetError());

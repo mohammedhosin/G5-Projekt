@@ -11,12 +11,11 @@
 
 #include <stdio.h>
 typedef struct Player_type *Player;
-int getPlayerPositionX(Player p);
-int getPlayerPositionY(Player p);
-Player createPlayer(int x, int y);
-void setPlayerPositionY(Player p, int y);
-void setY(Player p, int y);
-void setX(Player p, int x);
+float getPlayerPositionX(Player p);
+float getPlayerPositionY(Player p);
+Player createPlayer(float x, float y);
+void setPlayerPositionY(Player p, float y);
+void setPlayerPositionX(Player p, float x);
 int getPlayerWidth();
 int getPlayerHeight();
 
