@@ -10,6 +10,7 @@
 		A740E1F52444F9BA005962AA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F42444F9BA005962AA /* libSDL2-2.0.0.dylib */; };
 		A740E1F72444F9D0005962AA /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */; };
 		A740E2032444FA55005962AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A740E2022444FA55005962AA /* main.c */; };
+		A749D4272449BF15009527DA /* libSDL2_net-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		A740E2002444FA55005962AA /* SoccerField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoccerField.png; sourceTree = "<group>"; };
 		A740E2012444FA55005962AA /* Player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player1.png; sourceTree = "<group>"; };
 		A740E2022444FA55005962AA /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_net-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_net/2.0.1/lib/libSDL2_net-2.0.0.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A749D4272449BF15009527DA /* libSDL2_net-2.0.0.dylib in Frameworks */,
 				A740E1F72444F9D0005962AA /* libSDL2_image-2.0.0.dylib in Frameworks */,
 				A740E1F52444F9BA005962AA /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
@@ -66,6 +69,7 @@
 		A740E1ED2444F690005962AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */,
 				A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */,
 				A740E1F42444F9BA005962AA /* libSDL2-2.0.0.dylib */,
 			);
@@ -276,6 +280,8 @@
 					/usr/local/Cellar/sdl2_image/2.0.4/lib,
 					/usr/local/Cellar/sdl2/2.0.12_1/lib,
 					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+					/usr/local/Cellar/sdl_net/1.2.8/lib,
+					/usr/local/Cellar/sdl2_net/2.0.1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -294,6 +300,8 @@
 					/usr/local/Cellar/sdl2_image/2.0.4/lib,
 					/usr/local/Cellar/sdl2/2.0.12_1/lib,
 					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+					/usr/local/Cellar/sdl_net/1.2.8/lib,
+					/usr/local/Cellar/sdl2_net/2.0.1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

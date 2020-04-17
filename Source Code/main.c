@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_net.h>
 
 const int WINDOW_WIDTH = 960, WINDOW_HEIGTH = 540;
 bool init();
