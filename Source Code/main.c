@@ -89,13 +89,15 @@ int main(int argc, const char * argv[])
 
     // start sprite in the the middle of the goal
     //float x_pos = (WINDOW_WIDTH - dest.w); //Starting x-pos for right team
-    
+/*
     float x_pos = (0); //Starting x-pos for left team
     float y_pos = (WINDOW_HEIGTH - gPlayer.h) / 2;
-    /*
+*/
     setPlayerPositionX(player, 0);
     setPlayerPositionY(player, (WINDOW_HEIGTH - gPlayer.h) / 2);
-*/
+    float x_pos = getPlayerPositionX(player);
+    float y_pos = getPlayerPositionY(player);
+
     // keep track of which inputs are given
     bool up = false;
     bool down = false;
@@ -168,14 +170,17 @@ int main(int argc, const char * argv[])
             }
         }
         //Update positions of the struct
-        x_pos += (determineVelocityX(left, right) / 60);
-        y_pos += (determineVelocityY(up, down) / 60);
-       
+        setPlayerPositionX(player, x_pos += (determineVelocityX(left, right) / 60));
+        setPlayerPositionY(player, y_pos += (determineVelocityY(up, down) / 60));
+        /*
+        x_pos += (determineVelocityX(left, right) / 60));
+        y_pos += (determineVelocityY(up, down) / 60));
+         */
         // set the positions in the struct
         gPlayer.y = collisionDetectionYpos(y_pos);
         gPlayer.x = collisionDetectionXpos(x_pos);
         /*  end of SDL_net.zip*/
-        
+
         SDL_RenderClear(renderer);
         renderBackground();
         //SDL_RenderCopyEx(renderer, mPlayer, NULL, &dest, 0, NULL, SDL_FLIP_NONE);
@@ -237,7 +242,7 @@ int determineVelocityX(bool left, bool right)
 int collisionDetectionXpos(int x_pos)
 {
     if (x_pos <= 0) x_pos = 0;
-    if (x_pos >= WINDOW_WIDTH - gPlayer.w) x_pos = WINDOW_WIDTH - gPlayer.w;
+    if (x_pos >= WINDOW_WIDTH - getPlayerHeight()) x_pos = WINDOW_WIDTH - getPlayerWidth();
     return x_pos;
 }
 /**
@@ -247,7 +252,7 @@ Code taken from Jonas Willén, SDL_net.zip
 int collisionDetectionYpos(int y_pos)
 {
     if (y_pos <= 0) y_pos = 0;
-    if (y_pos >= WINDOW_HEIGTH - gPlayer.h) y_pos = WINDOW_HEIGTH - gPlayer.h;
+    if (y_pos >= WINDOW_HEIGTH - getPlayerHeight()) y_pos = WINDOW_HEIGTH - getPlayerWidth();
     return y_pos;
 }
 /**
@@ -265,7 +270,7 @@ bool initMedia()
     sPlayer = IMG_Load("images/Player1.png");
     
     mPlayer = SDL_CreateTextureFromSurface(renderer, sPlayer);
-    player = createPlayer(100, 100);
+    player = createPlayer(0, 0);
 
     
     gPlayer.x = getPlayerPositionX(player);
