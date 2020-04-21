@@ -23,12 +23,18 @@ SDL_Window *window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface *imageSurface =  NULL;
 SDL_Surface *sPlayer = NULL;
+SDL_Surface *sGoal_Left = NULL;
+SDL_Surface *sGoal_Right = NULL;
 //SDL_Surface *windowSurface = NULL;
 SDL_Texture *mField;
 SDL_Texture *mPlayer = NULL;
+SDL_Texture *mGoal_Left = NULL;
+SDL_Texture *mGoal_Right = NULL;
 
 Player player = NULL;
 SDL_Rect gField;
+SDL_Rect gGoal_Left;
+SDL_Rect gGoal_Right;
 // struct to hold the position and size of the sprite
 SDL_Rect gPlayer;
 #define SPEED (300); //75 is optimal, 300 for dev.
@@ -303,10 +309,26 @@ bool initPlayField()
         flag = false;
     }
     imageSurface = IMG_Load("images/SoccerField.png");
-    
+    sGoal_Left = IMG_Load("images/Goal.png");
+    sGoal_Right = IMG_Load("images/Goal.png");
     mField = SDL_CreateTextureFromSurface(renderer, imageSurface);
+    mGoal_Left = SDL_CreateTextureFromSurface(renderer, sGoal_Left);
+    mGoal_Right = SDL_CreateTextureFromSurface(renderer, sGoal_Right);
+    //Left goal rect init position and define width and heigth
+    gGoal_Left.h=370;
+    gGoal_Left.w = 50;
+    gGoal_Left.x = 0;
+    gGoal_Left.y = WINDOW_HEIGTH/2 - gGoal_Left.h/2;
+    
+    //Right goal rect init position and define width and heigth
+    gGoal_Right.h=370;
+    gGoal_Right.w = 50;
+    gGoal_Right.x = WINDOW_WIDTH-gGoal_Right.w;
+    gGoal_Right.y = WINDOW_HEIGTH/2 - gGoal_Left.h/2;
+    //Field Rect init positions and define width and heigth
+    
     gField.x = 0; gField.y = 0; gField.h = WINDOW_HEIGTH; gField.w = WINDOW_WIDTH;
-    if(NULL == imageSurface)
+    if(NULL == imageSurface && NULL == sGoal_Left && NULL == sGoal_Right)
     {
         printf("\nCould not load image. Error: %s",SDL_GetError());
         printf("\n");
@@ -324,6 +346,8 @@ void renderBackground()
     SDL_UpdateWindowSurface(window);
      */
     SDL_RenderCopy(renderer, mField, NULL, &gField);
+    SDL_RenderCopy(renderer,mGoal_Left, NULL, &gGoal_Left);
+    SDL_RenderCopy(renderer, mGoal_Right, NULL, &gGoal_Right);
 }
 
 /**
