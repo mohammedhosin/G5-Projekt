@@ -38,7 +38,7 @@ SDL_Rect gGoal_Right;
 // struct to hold the position and size of the sprite
 SDL_Rect gPlayer;
 #define SPEED (300); //75 is optimal, 300 for dev.
-int main(int argc, const char * argv[])
+int main(int argc, char * argv[])
 {
     /**
      Implement into player object?
