@@ -108,6 +108,8 @@ int main(int argc, char * argv[])
     float x_pos = getPlayerPositionX(player);
     float y_pos = getPlayerPositionY(player);
 
+    printf("Hello");
+    
     float ball_xPos = 470;
     float ball_yPos = 260;
  
