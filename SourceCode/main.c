@@ -16,7 +16,9 @@ int collisionDetectionXpos(int x_pos);
 int collisionDetectionYpos(int y_pos);
 int determineVelocityX(bool left, bool right);
 int determineVelocityY(bool up, bool down);
-//dssadaöldasd
+
+//Testarkommentera//Sofie
+
 SDL_Window *window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface *imageSurface =  NULL;
@@ -63,6 +65,7 @@ int main(int argc, char * argv[])
     }
     else
     {
+        printf("Initialize playfield successful.\n");
         printf("Initialize playfield successful.\n");
     }
     //Init other graphical media.
