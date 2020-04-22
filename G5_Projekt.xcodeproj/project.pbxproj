@@ -37,7 +37,6 @@
 		A7F1D43B24505EE2007312F8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		A7F1D43C24505EE2007312F8 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		A7F1D43D24505EE2007312F8 /* Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
-		A7F1D441245063D5007312F8 /* G5_Projekt */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = G5_Projekt; path = "../../Library/Developer/Xcode/DerivedData/G5_Projekt-fzpomyasughjoefbudducyqtuoup/Build/Products/Debug/G5_Projekt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +59,6 @@
 				A7F1D43624505EE2007312F8 /* SourceCode */,
 				A740E1ED2444F690005962AA /* Frameworks */,
 				A7F1D42B24505EAB007312F8 /* G5_Projekt */,
-				A7F1D440245063CA007312F8 /* New Group */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,14 +91,6 @@
 				A7F1D43A24505EE2007312F8 /* Player1.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		A7F1D440245063CA007312F8 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				A7F1D441245063D5007312F8 /* G5_Projekt */,
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
