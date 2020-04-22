@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <SDL2/SDL_image.h>
@@ -14,9 +15,10 @@ bool initPlayField();
 bool initMedia();
 int collisionDetectionXpos(int x_pos);
 int collisionDetectionYpos(int y_pos);
-int determineVelocityX(bool left, bool right);
-int determineVelocityY(bool up, bool down);
-
+int determineVelocityX(bool left, bool right, float startingSpeed);
+int determineVelocityY(bool up, bool down, float startingSpeed);
+void speedLimit(Player p);
+void colissionDetectionPlayerArena(Player p);
 
 
 SDL_Window *window = NULL;
@@ -38,7 +40,11 @@ SDL_Rect gGoal_Right;
 // struct to hold the position and size of the sprite
 SDL_Rect gPlayer;
 #define SPEED (300); //75 is optimal, 300 for dev.
-int main(int argc, const char * argv[])
+#define MAX_SPEED_REVERSE -1
+#define MAX_SPEED_FORWARD 8
+#define TURNING_SPEED 10
+#define ACCELERATION 0.1
+int main(int argc, char * argv[])
 {
     /**
      Implement into player object?
@@ -85,7 +91,7 @@ int main(int argc, const char * argv[])
     {
         printf("Initialize media successful.\n");
     }
-    /*  Taken from Jonas Willén, SDL_net.zip*/
+    /*  Taken from Jonas Will�n, SDL_net.zip*/
         
 
     // get and scale the dimensions of texture
@@ -100,6 +106,7 @@ int main(int argc, const char * argv[])
     float y_pos = (WINDOW_HEIGTH - gPlayer.h) / 2;
 */
     setPlayerPositionX(player, 0);
+    setPlayerDirection(player, 90);
     setPlayerPositionY(player, (WINDOW_HEIGTH - gPlayer.h) / 2);
     float x_pos = getPlayerPositionX(player);
     float y_pos = getPlayerPositionY(player);
@@ -117,7 +124,7 @@ int main(int argc, const char * argv[])
     {
     /**
     While loop checking if an event occured.
-     Code taken from Jonas Willén, SDL_net.zip
+     Code taken from Jonas Will�n, SDL_net.zip
      */
         SDL_Event event;
         while (SDL_PollEvent(&event))
@@ -175,22 +182,35 @@ int main(int argc, const char * argv[])
                 break;
             }
         }
-        //Update positions of the struct
-        setPlayerPositionX(player, x_pos += (determineVelocityX(left, right) / 60));
-        setPlayerPositionY(player, y_pos += (determineVelocityY(up, down) / 60));
+        //Update attributes of the struct
+        if (up == true)
+            changePlayerSpeed(player, ACCELERATION);
+        if (down == true)
+            changePlayerSpeed(player, -ACCELERATION);
+        speedLimit(player);
+        if (left == true)
+            changePlayerDirection(player, TURNING_SPEED - getPlayerSpeed(player));      //while it's fun to always turn fast, the game feels more realistic if you cant turn as fast on high speeds
+        if (right == true)
+            changePlayerDirection(player, -TURNING_SPEED + getPlayerSpeed(player));     //while it's fun to always turn fast, the game feels more realistic if you cant turn as fast on high speeds
+        //Update position of the struct
+        updatePlayerPosition(player, 1);
+        colissionDetectionPlayerArena(player);
+        printf("X:%f, Y:%f, speed:%f, direction:%f\n",getPlayerPositionX(player),getPlayerPositionY(player),getPlayerSpeed(player),getPlayerDirection(player));
         /*
         x_pos += (determineVelocityX(left, right) / 60));
         y_pos += (determineVelocityY(up, down) / 60));
          */
         // set the positions in the struct
+        float x_pos = getPlayerPositionX(player);
+        float y_pos = getPlayerPositionY(player);
         gPlayer.y = collisionDetectionYpos(y_pos);
         gPlayer.x = collisionDetectionXpos(x_pos);
         /*  end of SDL_net.zip*/
 
         SDL_RenderClear(renderer);
         renderBackground();
-        //SDL_RenderCopyEx(renderer, mPlayer, NULL, &dest, 0, NULL, SDL_FLIP_NONE);
-        SDL_RenderCopy(renderer, mPlayer, NULL, &gPlayer);
+        SDL_RenderCopyEx(renderer, mPlayer, NULL, &gPlayer, -getPlayerDirection(player), NULL, SDL_FLIP_NONE);
+        //SDL_RenderCopy(renderer, mPlayer, NULL, &gPlayer);
         SDL_RenderPresent(renderer);
         
         
@@ -207,44 +227,74 @@ int main(int argc, const char * argv[])
     SDL_Quit();
     return 0;
 }
+void speedLimit(Player p)   //how fast do the cars go forward and in reverse? if a player goes beyond the cars limits, this sets the car back to it's limits
+{
+    if (getPlayerSpeed(p)>MAX_SPEED_FORWARD)
+        setPlayerSpeed(p, MAX_SPEED_FORWARD);
+    if (getPlayerSpeed(p)<MAX_SPEED_REVERSE)
+        setPlayerSpeed(p, MAX_SPEED_REVERSE);
+}
+void colissionDetectionPlayerArena(Player p)    //keeping the abstract version of the car on the arena prevents you getting visually stuck in the corner while lost far off the map
+{
+    float slow = 0.96;                          //slow factor for colliding with arena walls helps changing direction when you messed up bad, and in theory slows down people who ram it but it's very neglible for that purpose
+    if (getPlayerPositionX(p) < 0)
+    {
+        setPlayerPositionX(p, 0);
+        setPlayerSpeed(player, getPlayerSpeed(player)*slow);
+    }
+    if (getPlayerPositionY(p) < 0)
+    {
+        setPlayerPositionY(p, 0);
+        setPlayerSpeed(player, getPlayerSpeed(player)*slow);
+    }
+    if (getPlayerPositionX(p) > WINDOW_WIDTH - getPlayerHeight())
+    {
+        setPlayerPositionX(p, WINDOW_WIDTH - getPlayerWidth());
+        setPlayerSpeed(player, getPlayerSpeed(player)*slow);
+    }
+    if (getPlayerPositionY(p) > WINDOW_HEIGTH - getPlayerHeight())
+    {
+        setPlayerPositionY(p, WINDOW_HEIGTH - getPlayerHeight());
+        setPlayerSpeed(player, getPlayerSpeed(player)*slow);
+    }
+}
 /*
  Determines the velocity on y-axis.
- Code taken from Jonas Willén, SDL_net.zip
+ Code taken from Jonas Will�n, SDL_net.zip
  */
-int determineVelocityY(bool up, bool down)
+int determineVelocityY(bool up, bool down, float startingSpeed)
 {
-    int y_vel = 0;
     if (up && !down)
     {
-        y_vel = -SPEED;
+        startingSpeed =- SPEED;
     }
     if (down && !up)
     {
-        y_vel = SPEED;
+        startingSpeed =+ SPEED;
     }
-    return y_vel;
+    return startingSpeed;
 }
 /*
 Determines the velocity on x-axis.
-Code taken from Jonas Willén, SDL_net.zip
+Code taken from Jonas Will�n, SDL_net.zip
 */
-int determineVelocityX(bool left, bool right)
+int determineVelocityX(bool left, bool right, float startingSpeed)
 {
-    int x_vel = 0;
     if (left && !right)
     {
-        x_vel = -SPEED;
+        startingSpeed =- SPEED;
     }
     if (right && !left)
     {
-        x_vel = SPEED;
+        startingSpeed =+ SPEED;
     }
-    return x_vel;
+    return startingSpeed;
 }
 /**
  Collisiondetection for moving object on X-axis. Makes sure that the objec stays within the window
- Code taken from Jonas Willén, SDL_net.zip
+ Code taken from Jonas Will�n, SDL_net.zip
  */
+
 int collisionDetectionXpos(int x_pos)
 {
     if (x_pos <= 0) x_pos = 0;
@@ -253,7 +303,7 @@ int collisionDetectionXpos(int x_pos)
 }
 /**
 Collisiondetection for moving object on Y-axis. Makes sure that the objec stays within the window
-Code taken from Jonas Willén, SDL_net.zip
+Code taken from Jonas Will�n, SDL_net.zip
 */
 int collisionDetectionYpos(int y_pos)
 {
@@ -282,7 +332,7 @@ bool initMedia()
     gPlayer.x = getPlayerPositionX(player);
     gPlayer.y = getPlayerPositionY(player);
     gPlayer.h = getPlayerHeight();
-    gPlayer.w =getPlayerWidth();
+    gPlayer.w = getPlayerWidth();
      
     
     
@@ -351,7 +401,7 @@ void renderBackground()
 }
 
 /**
- Init code taken from Jonas Willén.
+ Init code taken from Jonas Will�n.
  Creates window and a renderer.
  Gets windowSurface from window to present background (play field).
  Returns false if init failed.
