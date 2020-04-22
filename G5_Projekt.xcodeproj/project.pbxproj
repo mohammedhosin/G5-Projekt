@@ -10,8 +10,8 @@
 		A740E1F52444F9BA005962AA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F42444F9BA005962AA /* libSDL2-2.0.0.dylib */; };
 		A740E1F72444F9D0005962AA /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */; };
 		A749D4272449BF15009527DA /* libSDL2_net-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */; };
-		A7F1D43E24505EE2007312F8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A7F1D43C24505EE2007312F8 /* main.c */; };
-		A7F1D43F24505EE2007312F8 /* Player.c in Sources */ = {isa = PBXBuildFile; fileRef = A7F1D43D24505EE2007312F8 /* Player.c */; };
+		A7F1D44D24506DC4007312F8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A7F1D44B24506DC4007312F8 /* main.c */; };
+		A7F1D44E24506DC4007312F8 /* Player.c in Sources */ = {isa = PBXBuildFile; fileRef = A7F1D44C24506DC4007312F8 /* Player.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,12 +31,12 @@
 		A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_net-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_net/2.0.1/lib/libSDL2_net-2.0.0.dylib"; sourceTree = "<group>"; };
 		A7F1D42B24505EAB007312F8 /* G5_Projekt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = G5_Projekt; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7F1D43824505EE2007312F8 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
-		A7F1D43924505EE2007312F8 /* SoccerField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoccerField.png; sourceTree = "<group>"; };
-		A7F1D43A24505EE2007312F8 /* Player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player1.png; sourceTree = "<group>"; };
-		A7F1D43B24505EE2007312F8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		A7F1D43C24505EE2007312F8 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		A7F1D43D24505EE2007312F8 /* Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
+		A7F1D44A24506DC4007312F8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		A7F1D44B24506DC4007312F8 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		A7F1D44C24506DC4007312F8 /* Player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
+		A7F1D45024506F36007312F8 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
+		A7F1D45124506F36007312F8 /* SoccerField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoccerField.png; sourceTree = "<group>"; };
+		A7F1D45224506F36007312F8 /* Player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		A740E1D42444F61D005962AA = {
 			isa = PBXGroup;
 			children = (
-				A7F1D43624505EE2007312F8 /* SourceCode */,
+				A7F1D44924506DC4007312F8 /* SourceCode */,
 				A740E1ED2444F690005962AA /* Frameworks */,
 				A7F1D42B24505EAB007312F8 /* G5_Projekt */,
 			);
@@ -72,25 +72,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A7F1D43624505EE2007312F8 /* SourceCode */ = {
+		A7F1D44924506DC4007312F8 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
-				A7F1D43724505EE2007312F8 /* Images */,
-				A7F1D43B24505EE2007312F8 /* Player.h */,
-				A7F1D43C24505EE2007312F8 /* main.c */,
-				A7F1D43D24505EE2007312F8 /* Player.c */,
+				A7F1D44F24506F36007312F8 /* Images */,
+				A7F1D44A24506DC4007312F8 /* Player.h */,
+				A7F1D44B24506DC4007312F8 /* main.c */,
+				A7F1D44C24506DC4007312F8 /* Player.c */,
 			);
 			path = SourceCode;
 			sourceTree = "<group>";
 		};
-		A7F1D43724505EE2007312F8 /* Images */ = {
+		A7F1D44F24506F36007312F8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A7F1D43824505EE2007312F8 /* Goal.png */,
-				A7F1D43924505EE2007312F8 /* SoccerField.png */,
-				A7F1D43A24505EE2007312F8 /* Player1.png */,
+				A7F1D45024506F36007312F8 /* Goal.png */,
+				A7F1D45124506F36007312F8 /* SoccerField.png */,
+				A7F1D45224506F36007312F8 /* Player1.png */,
 			);
-			path = Images;
+			name = Images;
+			path = "../../../Library/Developer/Xcode/DerivedData/G5_Projekt-fzpomyasughjoefbudducyqtuoup/Build/Products/Debug/Images";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,8 +172,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F1D43F24505EE2007312F8 /* Player.c in Sources */,
-				A7F1D43E24505EE2007312F8 /* main.c in Sources */,
+				A7F1D44E24506DC4007312F8 /* Player.c in Sources */,
+				A7F1D44D24506DC4007312F8 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
