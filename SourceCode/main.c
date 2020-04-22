@@ -17,7 +17,6 @@ int collisionDetectionYpos(int y_pos);
 int determineVelocityX(bool left, bool right);
 int determineVelocityY(bool up, bool down);
 
-//Testkommentar 20
 SDL_Window *window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface *imageSurface =  NULL;
