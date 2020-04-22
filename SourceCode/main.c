@@ -66,6 +66,7 @@ int main(int argc, char * argv[])
     else
     {
         printf("Initialize playfield successful.\n");
+        printf("Initialize playfield successful.\n");
     }
     //Init other graphical media.
     if(!initMedia())
