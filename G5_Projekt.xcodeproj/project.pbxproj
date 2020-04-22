@@ -10,8 +10,6 @@
 		A740E1F52444F9BA005962AA /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F42444F9BA005962AA /* libSDL2-2.0.0.dylib */; };
 		A740E1F72444F9D0005962AA /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */; };
 		A749D4272449BF15009527DA /* libSDL2_net-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */; };
-		A7DF41A22449C80300648208 /* Player.c in Sources */ = {isa = PBXBuildFile; fileRef = A7DF41A12449C80300648208 /* Player.c */; };
-		A7DF41B02449D51B00648208 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A740E2022444FA55005962AA /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,16 +25,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A740E1DD2444F61D005962AA /* G5_Projekt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = G5_Projekt; sourceTree = BUILT_PRODUCTS_DIR; };
+		A740E1DD2444F61D005962AA /* G5_Projekt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = G5_Projekt; path = /Users/ernstreutergardh/Documents/G5_Projekt/build/Debug/G5_Projekt; sourceTree = "<absolute>"; };
 		A740E1F42444F9BA005962AA /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.12_1/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		A740E1F62444F9D0005962AA /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
-		A740E2022444FA55005962AA /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		A749D4262449BF15009527DA /* libSDL2_net-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_net-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_net/2.0.1/lib/libSDL2_net-2.0.0.dylib"; sourceTree = "<group>"; };
-		A79FCDFE2450569D00B28F21 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
-		A79FCDFF2450569D00B28F21 /* SoccerField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoccerField.png; sourceTree = "<group>"; };
-		A79FCE002450569D00B28F21 /* Player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player1.png; sourceTree = "<group>"; };
-		A7DF41A02449C80300648208 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		A7DF41A12449C80300648208 /* Player.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
+		A7F1D41824505B6A007312F8 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
+		A7F1D41924505B6A007312F8 /* SoccerField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SoccerField.png; sourceTree = "<group>"; };
+		A7F1D41A24505B6A007312F8 /* Player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player1.png; sourceTree = "<group>"; };
+		A7F1D41C24505B6A007312F8 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		A7F1D41D24505B6A007312F8 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		A7F1D41E24505B6A007312F8 /* Player.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Player.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,18 +54,9 @@
 		A740E1D42444F61D005962AA = {
 			isa = PBXGroup;
 			children = (
-				A740E1FE2444FA55005962AA /* Source Code */,
-				A740E1DE2444F61D005962AA /* Products */,
+				A7F1D41624505B6A007312F8 /* SourceCode */,
 				A740E1ED2444F690005962AA /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		A740E1DE2444F61D005962AA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A740E1DD2444F61D005962AA /* G5_Projekt */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A740E1ED2444F690005962AA /* Frameworks */ = {
@@ -80,23 +69,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A740E1FE2444FA55005962AA /* Source Code */ = {
+		A7F1D41624505B6A007312F8 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
-				A79FCDFD2450569D00B28F21 /* Images */,
-				A740E2022444FA55005962AA /* main.c */,
-				A7DF41A02449C80300648208 /* Player.h */,
-				A7DF41A12449C80300648208 /* Player.c */,
+				A7F1D41724505B6A007312F8 /* Images */,
+				A7F1D41C24505B6A007312F8 /* Player.h */,
+				A7F1D41D24505B6A007312F8 /* main.c */,
+				A7F1D41E24505B6A007312F8 /* Player.c */,
 			);
-			path = "Source Code";
-			sourceTree = "<group>";
+			path = SourceCode;
+			sourceTree = SOURCE_ROOT;
 		};
-		A79FCDFD2450569D00B28F21 /* Images */ = {
+		A7F1D41724505B6A007312F8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A79FCDFE2450569D00B28F21 /* Goal.png */,
-				A79FCDFF2450569D00B28F21 /* SoccerField.png */,
-				A79FCE002450569D00B28F21 /* Player1.png */,
+				A7F1D41824505B6A007312F8 /* Goal.png */,
+				A7F1D41924505B6A007312F8 /* SoccerField.png */,
+				A7F1D41A24505B6A007312F8 /* Player1.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -164,7 +153,7 @@
 				Base,
 			);
 			mainGroup = A740E1D42444F61D005962AA;
-			productRefGroup = A740E1DE2444F61D005962AA /* Products */;
+			productRefGroup = A740E1D42444F61D005962AA;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -179,8 +168,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7DF41B02449D51B00648208 /* main.c in Sources */,
-				A7DF41A22449C80300648208 /* Player.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
