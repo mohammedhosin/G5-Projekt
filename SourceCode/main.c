@@ -356,7 +356,7 @@ void renderBackground()
  */
 bool init()
 {
-    bool test = true;
+    bool init = true;
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("Under production", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGTH, SDL_WINDOW_SHOWN);
     
@@ -366,14 +366,14 @@ bool init()
     {
         printf("Could not create window. Error: %s ",SDL_GetError());
         printf("\n");
-        test = false;
+        init = false;
     }
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if(renderer == NULL)
     {
         printf("Could not create renderer. Error: %s",SDL_GetError());
         printf("\n");
-        test = false;
+        init = false;
     }
-    return test;
+    return init;
 }
